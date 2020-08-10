@@ -1,0 +1,68 @@
+
+
+#goods{
+	width: 80%;
+	float: left;
+	margin-right:3%;
+}
+
+.task_imput{
+	width:70%;
+	height:39px;
+	padding:10px;
+	border:2px #FF5733;
+}
+
+.add_btn{
+	height:39px;
+	padding:5px 20px;
+	color: #FFFFFF;
+	background: #BC0E0E;
+	border-radius: 5px;
+}
+
+
+
+#ul #li {
+	margin:auto;
+	width: 70%;
+	list-style: none;
+	padding: 15px;
+	margin-bottom: 10px;
+	background: #fcfcfc;
+	border:1px solid silver;
+	border-radius: 5px; 
+}
+
+
+
+#ul {
+	margin-left: -40px;
+
+}
+
+#ul:hover {
+
+}
+
+.del_good {
+	margin-left: 10px;
+	border: 0px;
+	padding: 5px 15px;
+	color: #FFFFFF;
+	font-size: 13px;
+	background: #db5757;
+	float: right;
+	border-radius: 5px;
+}
+
+.info_good {
+	border: 0px;
+	padding: 5px 15px;
+	color: #FFFFFF;
+	font-size: 13px;
+	background: #28a745;
+	float: right;
+	border-radius: 5px;
+}
+
