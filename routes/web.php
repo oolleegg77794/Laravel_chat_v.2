@@ -13,7 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::any('/', 'ChatController@store')-> name('home');
+
+
+
+Route::any('/', 'ChatController@store');
+
+Route::any('/saveindex', 'ChatController@saveindex');
+
+
 
 Route::post('/sendMessage', 'ChatController@save');
 
@@ -22,3 +29,10 @@ Route::any('/logs', 'ChatController@getLog');
 Route::get('chat/store', 'ChatController@store');
 
 Route::get('chat/getMessages', 'ChatController@getMessages');
+
+
+
+Route::any('/soketchat', 'ChatController@soketchat');
+
+Route::any('/soketchatsave', 'ChatController@soketchatsave');
+

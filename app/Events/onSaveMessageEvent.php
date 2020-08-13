@@ -9,33 +9,31 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Event;
 use App\Models\chat;
 
-class onSaveMessageEvent
+class onSaveMessageEvent extends Event implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $chat_name;
-    public $chat_message;
+    
+    public $chat;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct(Chat $chat)
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+   
+
+    public function __construct($chat)
     {
-        //
-        $this->chat_name = $chat->name;
-        $this->chat_message = $chat->message;
+        $this->chat = $chat;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return ['chat'];
     }
+
+    public function broadcastAs()
+    {
+        return 'chat';
+    }
+
 }

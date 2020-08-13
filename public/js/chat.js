@@ -42,11 +42,11 @@ function getNewMessages(){
       type: 'GET',
       success: function(response){
         response = JSON.parse(response);
-        for(key in response){
-          currentData = response[key];
-          $('#messages').append('<div class="msg" msgId="'+currentData.id+'"><p>'+currentData.name+'</p>'+currentData.message+'</div>');
+        
+          value = response;
+          $('#messages').append('<div class="msg" msgId="'+value.id+'"><p>'+value.name+'</p>'+value.message+'</div>');
           $('#messages').animate({scrollTop:$('#messages')[0].scrollHeight});
-        }
+       
         console.log(response);
         setTimeout(getNewMessages, 2000);
       }
