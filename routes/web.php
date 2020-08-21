@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Redis;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,13 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
-
 Route::any('/', 'ChatController@store');
 
 Route::any('/saveindex', 'ChatController@saveindex');
-
 
 
 Route::post('/sendMessage', 'ChatController@save');
@@ -32,7 +28,5 @@ Route::get('chat/getMessages', 'ChatController@getMessages');
 
 
 
-Route::any('/soketchat', 'ChatController@soketchat');
 
-Route::any('/soketchatsave', 'ChatController@soketchatsave');
 

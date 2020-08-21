@@ -4,29 +4,53 @@ $.ajaxSetup({
     }
 });
 
-    $(document).ready(function(){
-      $('#messages').animate({scrollTop:$('#messages')[0].scrollHeight});
-      name = prompt("Please enter your name");
-      if (name != '') {getNotification();}
-      $('form').submit(function(e){
-        e.preventDefault();
-        message = $('#message').val();
-        $.ajax({
-          type:"POST",
-          url: "/sendMessage",
-          data:  {message:message, name:name},
-          success: function(data){
-            $('#message').val('');  
-          }
-        })  
-      })
+$(document).ready(function(){
+    $('#messages').animate({scrollTop:$('#messages')[0].scrollHeight});
+    name = prompt("Please enter your name");
+    if (name != '') {getNotification();}
+    $('form').submit(function(e){
+    e.preventDefault();
+    message = $('#message').val();
+    $.ajax({
+      type:"POST",
+      url: "/sendMessage",
+      data:  {message:message, name:name},
+      success: function(data){
+        $('#message').val('');
+      }
+    })
     })
 
-    function getNotification(){
-      $('#messages').append('<div class="alert alert-primary" role="alert">User '+name+' entered  chat</div>');
-    }
-    
+    var socket = io(':6001');
+    socket.on('*', function(message) {
+        console.log(message)
+        message =  message.replace(/name/g,'').replace(/message/g,'').replace(/"/g,'');
+        var arraymessage = message.split(',');
+        renderMessage(arraymessage)
+    });
 
+    function renderMessage(arraymessage){
+        $('#messages').append('<div class="msg"><p>' + name + '</p>' + message + '</div>');
+        $('#messages').animate({scrollTop: $('#messages')[0].scrollHeight});
+    }
+
+    function getNotification(){
+        $('#messages').append('<div class="alert alert-primary" role="alert">User '+name+' entered  chat</div>');
+    }
+
+})
+
+
+
+
+
+
+
+
+
+
+
+/*
 $(document).ready(function(){
   getNewMessages();
 });
@@ -42,11 +66,11 @@ function getNewMessages(){
       type: 'GET',
       success: function(response){
         response = JSON.parse(response);
-        
-          value = response;
-          $('#messages').append('<div class="msg" msgId="'+value.id+'"><p>'+value.name+'</p>'+value.message+'</div>');
-          $('#messages').animate({scrollTop:$('#messages')[0].scrollHeight});
-       
+        value = response;
+        if (lastMessageId < value.id) {
+            $('#messages').append('<div class="msg" msgId="' + value.id + '"><p>' + value.name + '</p>' + value.message + '</div>');
+            $('#messages').animate({scrollTop: $('#messages')[0].scrollHeight});
+        }
         console.log(response);
         setTimeout(getNewMessages, 2000);
       }
@@ -54,7 +78,11 @@ function getNewMessages(){
   }catch(e){
     setTimeout(getNewMessages, 2000);
   }
-}
+}*/
 
 
-  
+
+
+
+
+

@@ -10,30 +10,28 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Event;
-use App\Models\chat;
 
 class onSaveMessageEvent extends Event implements ShouldBroadcast
 {
-    
+
     public $chat;
 
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-   
-
     public function __construct($chat)
     {
-        $this->chat = $chat;
+        echo $chat->name;
+
     }
 
     public function broadcastOn()
     {
-        return ['chat'];
+        return new Channel ('chat');
     }
 
     public function broadcastAs()
     {
-        return 'chat';
+        return 'messages';
     }
 
 }
