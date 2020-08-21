@@ -24,8 +24,16 @@ class ChatController extends Controller
 		$redis = Redis::connection();
 		$result = $redis->lrange("Messages", 0, -1);
 
+        $names =[];
+        foreach ($result as $name){
+            $result_message = json_decode($name);
+            array_push($names, $result_message->name);
+        }
+        $names = array_unique($names);
+
 		return view ('template.content')
-		-> with (['data'=>$result]);
+		-> with (['data'=>$result])
+        -> with (['names'=>$names]);
 
 	}
 

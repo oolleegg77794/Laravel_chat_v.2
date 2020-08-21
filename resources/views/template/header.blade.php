@@ -5,15 +5,9 @@
             All users
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-            @foreach($data as $el)
-                <?php
-                $result = json_decode($el);
-                $result = get_object_vars($result);
-                ?>
-                <a class="dropdown-item" href="#"> <?php echo $result['name']; ?></a>
+            @foreach ($names as $el)
+                <a class="dropdown-item" href="#"> <?php echo $el; ?></a>
             @endforeach
-
         </div>
     </div>
 </div>
