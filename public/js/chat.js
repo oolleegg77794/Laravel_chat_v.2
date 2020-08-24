@@ -23,14 +23,15 @@ $(document).ready(function(){
 
     var socket = io(':6001');
     socket.on('*', function(message) {
-        console.log(message)
-        message =  message.replace(/name/g,'').replace(/message/g,'').replace(/"/g,'');
+        message =  message.replace(/name/g,'').replace(/message/g,'')
+            .replace(/"/g,'').replace(/}/g,'').replace(/{/g,'').replace(/:/g,'').slice(17);
         var arraymessage = message.split(',');
+        console.log(message)
         renderMessage(arraymessage)
     });
 
     function renderMessage(arraymessage){
-        $('#messages').append('<div class="msg"><p>' + name + '</p>' + message + '</div>');
+        $('#messages').append('<div class="msg"><p>' + arraymessage[0] + '</p>' + arraymessage[1] + '</div>');
         $('#messages').animate({scrollTop: $('#messages')[0].scrollHeight});
     }
 
